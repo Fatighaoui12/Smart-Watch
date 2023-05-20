@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fomr</title>
+</head>
+<body>
+    <form id="contact-form" method="POST" action="/order">
+                        
+                     
+        <input type='hidden' name='utm_source' value="" />
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <p>
+
+                    <select name="color" class="form-control" >
+                               <option value="40535928045620">Pink Watch Pro </option>
+                               <!-- <option value="40535929421876"> BLUE Watch Pro </option> -->
+                               <!-- <option value="40540433055796"> Duo BLUE Watch Pro </option> -->
+                               <!-- <option value="40337492869172"> BEIGE Watch Pro  </option>
+                                <option value="duo"> DUO BEIGE & PINK Watch Pro </option>
+                               -->
+
+
+                                <!-- <option value="40337490542644">BLACK Watch Pro </option>  -->
+                                <!-- <option value="40623112552500">GRAY Watch Pro </option> -->
+                                <!-- <option value="40623101575220">Duo Pink Watch Pro</option>  -->
+                                <option value="40939713134644">Duo Pink Watch Pro</option> 
+                    </select>
+
+                </p>
+            </div>
+
+            <div class="col-12 col-md-6 colorDuo" style="display: none;">
+                <p>
+
+                    <select name="colorDuo" class="form-control" >
+                                <option value="40623101575220"> BLACK Watch Pro + GRAY Watch Pro  </option>
+                                <option value="40623116451892"> 2 GRAY Smart Watch Pro  </option>
+                                <option value="40337506140212"> 2 BLACK Smart Watch Pro  </option>
+                    </select>
+
+                </p>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <p>
+                    <input class="form-control" type="text" placeholder="Nom et prénom - الإسم والنسب" name="first_name"  />
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <p>
+                    <input class="form-control" type="text" placeholder="Ville - المدينة" name="city" />
+                </p>
+            </div>
+            <div class="col-12 col-md-6">
+                <p>
+                    <input class="form-control" type="tel" placeholder="N° de téléphone - رقم الهاتف" name="phone" />
+                </p>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>
+                    <textarea class="form-control" placeholder="Adresse - العنوان" name="address"></textarea>
+                </p>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>
+                    <button type="submit" class="nuxa-btn-submit">Acheter maintenant -  اشتري الآن</button>
+                </p>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
