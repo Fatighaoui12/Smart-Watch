@@ -18,7 +18,7 @@ Pour commencer, nous avons élaboré le Modèle Conceptuel de Données (MCD) gr�
 
 Ensuite, nous avons procédé à la construction du Modèle Logique de Données (MLD), toujours en utilisant la méthodologie MERISE. Le MLD est une étape intermédiaire qui permet de transformer le MCD en une représentation plus proche de la réalité du système d'information. Le MLD définit les 3 tables, les colonnes et les contraintes de la base de données. Grâce à cette étape, nous avons pu déterminer les types de données appropriés, les clés primaires et étrangères, ainsi que les relations entre les tables.
 
-
+/les photos n'on pas été affichés
 
 ![WhatsApp Image 2023-05-18 at 13 37 24](https://github.com/Fatighaoui12/Smart-Watch/assets/104173820/13e67e6d-d4f0-46d4-a669-15fc452759f0)
 
