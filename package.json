@@ -1,0 +1,29 @@
+{
+  "name": "ensias-agile-project-app",
+  "version": "1.0.0",
+  "description": "This is the Ensias Agile Project Application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha test/**/*.js",
+    "lint": "eslint views/**/",
+    "lint:fix": "eslint views/**/ --fix"
+  },
+  "author": "SSI23",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^7.1.1",
+    "passport-local-mongoose": "^8.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "eslint": "^8.41.0",
+    "eslint-plugin-html": "^7.1.0",
+    "html-validate": "^7.17.0",
+    "html-validator": "^6.0.1",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
+  }
+}
