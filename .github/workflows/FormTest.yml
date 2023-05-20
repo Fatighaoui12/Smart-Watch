@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Form Validate
+name: FormTest
 
 # Controls when the workflow will run
 on:
@@ -30,4 +30,4 @@ jobs:
         run: npm install jsdom --save-dev
 
       - name: Run tests
-        run: npx jest
+        run: npx jest formValidate.test.js
