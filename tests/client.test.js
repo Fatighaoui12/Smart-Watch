@@ -11,6 +11,7 @@ describe('Client Model', function() {
       orderedProduct: 'Product ABC'
     };
 
+    
     const client = new Client(clientData);
 
     assert.equal(client.fullName, clientData.fullName);
