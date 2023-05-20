@@ -30,4 +30,4 @@ jobs:
         run: npm install jsdom --save-dev
 
       - name: Run tests
-        run: npx jest
+        run: npx jest formValidate.test.js
