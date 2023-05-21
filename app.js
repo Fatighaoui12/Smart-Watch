@@ -94,6 +94,14 @@ app.get("/orders", loggedIn, async (req, res) => {
   res.render("orders", { clients });
 });
 
+function loggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/login");
+    }
+}
+
 app.post("/order", async (req, res) => {
   console.log(req);
   console.log(req.body);
