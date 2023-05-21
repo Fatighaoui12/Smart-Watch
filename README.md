@@ -1,6 +1,7 @@
 # Smart-Watch
 
 
+
 #Choix de Merise
 La conception de notre application a été réalisée en utilisant la méthodologie MERISE. Ce choix s'est avéré judicieux en raison des nombreux avantages offerts par MERISE pour la conception de bases de données.
 
