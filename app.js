@@ -126,6 +126,23 @@ app.post("/order", async (req, res) => {
   res.sendStatus(200);
 });
 
+
+app.get("/login", (req, res) => {
+    res.render("login");
+  });
+  
+  app.post(
+    "/login",
+    passport.authenticate("local", {
+      failureRedirect: "/login",
+      failureMessage: true,
+    }),
+    function (req, res) {
+      //res.json({ success: true, message: "Logged in successfully" });
+      res.redirect("/orders");
+    }
+  );
+
 // use env variable to define tcp/ip port with a default
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
