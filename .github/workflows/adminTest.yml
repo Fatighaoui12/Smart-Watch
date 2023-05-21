@@ -23,6 +23,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
+        
+      - name:  Install Jsdom
+        run: npm install jsdom
+        
       - name: Run tests
         run: npm test
