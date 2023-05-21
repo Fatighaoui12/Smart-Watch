@@ -7,6 +7,17 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
+    <script type="text/javascript">
+        var onloadCallback = function () {
+            grecaptcha.render('captcha-one', {
+                'sitekey': '6LcDDikmAAAAALhaI3LjqXm_mjaPE9qmE4xuYP9k'
+            });
+        };
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+    </script>
+
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6CR6CGC28X"></script>
     <script>
@@ -83,6 +94,14 @@
         * {
             font-family: 'Cairo', sans-serif;
         }
+
+        #hiddenRecaptcha-error {
+            display: block;
+        }
+
+        #buyButton {
+            clear: both;
+        }
     </style>
 
 </head>
@@ -154,17 +173,7 @@
 
                 <div class="col-12 col-md-6">
                     <div class="welcome-text wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.3s">
-                        <!-- <h2 style="margin-bottom: 20px;">Restez connecté avec style
-                            <br>avec <span style="color: #8e59d4;"> la SMART WATCH !</span>
-                        </h2>
-
-
-                        <h2 dir="rtl">
-                            خليك على اتصال بأسلوبك المتميز
-                            <span style="color: #8e59d4;">        
-خليك ستايل 
-</span> !
-                        </h2> -->
+                      
                         <p style=" text-align: justify; text-justify: inter-word;">
                             Gardez le contact pour pouvoir tout faire tout en gardant votre téléphone dans votre sac !
                             Restez en forme avec des capteurs pour suivre toutes vos activités !
@@ -889,7 +898,8 @@
 
                                         <select name="color" class="form-control" id="color">
                                             <% for(let product of products) { %>
-                                            <option value="<%= product.productName %>"><%= product.productName %></option>
+                                            <option value="<%= product.productName %>"><%= product.productName %>
+                                            </option>
                                             <% } %>
                                         </select>
 
@@ -899,7 +909,8 @@
                                 <div class="col-12 col-md-6">
                                     <p>
                                         <input class="form-control" type="text"
-                                            placeholder="Nom et prénom - الإسم والنسب" name="first_name" id="first_name"/>
+                                            placeholder="Nom et prénom - الإسم والنسب" name="first_name"
+                                            id="first_name" />
                                     </p>
                                 </div>
                             </div>
@@ -907,7 +918,7 @@
                                 <div class="col-12 col-lg-6">
                                     <p>
                                         <input class="form-control" type="text" placeholder="Ville - المدينة"
-                                            name="city" id="city"/>
+                                            name="city" id="city" />
                                     </p>
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -921,23 +932,26 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <p>
-                                        <textarea class="form-control" placeholder="Adresse - العنوان"
-                                            name="address" id="address"></textarea>
+                                        <textarea class="form-control" placeholder="Adresse - العنوان" name="address"
+                                            id="address"></textarea>
                                     </p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <p>
-                                        <button type="submit" class="nuxa-btn-submit">Acheter maintenant - اشتري
-                                            الآن</button>
-                                    </p>
-                                </div>
-                            </div>
-                        </form>
+                            <div id="captcha-one" class="my-3 d-block"></div>
+                            <input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha">
                     </div>
+                    <div id="buyButton" class="row d-block">
+                        <div class="col-lg-12">
+                            <p>
+                                <button type="submit" class="nuxa-btn-submit">Acheter maintenant - اشتري
+                                    الآن</button>
+                            </p>
+                        </div>
+                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <!-- Contact Area End -->
@@ -1033,7 +1047,7 @@
             //     $('.colorDuo').fadeIn();
             // } 
 
-            
+
 
             if (selected == 0) {
                 $('#price').html('<%- products[0].productPrice %> Dh (Livraison gratuite) ');
@@ -1052,7 +1066,9 @@
         })
 
 
+
         $("#contact-form").validate({
+            ignore: ".ignore",
             // Specify validation rules
             rules: {
                 // The key name on the left side is the name attribute
@@ -1064,8 +1080,18 @@
                     required: true,
                     number: true
                 },
-                address: "required"
+                address: "required",
+                hiddenRecaptcha: {
+                    required: function () {
+                        if (grecaptcha.getResponse(0) == '') {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                }
             },
+
             // Specify validation error messages
             messages: {
                 first_name: "Veuillez insérer votre nom et prénom",
@@ -1073,6 +1099,7 @@
                 phone: 'Veuillez insérer votre numéro de téléphone',
                 address: "Veuillez insérer votre adresse de livraison",
                 digits: "Le numéro de téléphone est incorrect ",
+                hiddenRecaptcha: 'Veuillez vérifier le recaptcha'
             },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
