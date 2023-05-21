@@ -28,6 +28,55 @@ db.once("open", () => {
   console.log("Database Connected");
 });
 
+// Session Configs
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
+app.use(express.static("views"));
+app.use(cookieParser("cookieSecret"));
+// Authentication configuration
+const sessionConfig = {
+  name: "session-cookie",
+  secret: "thisisasecret!",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+};
+app.use(
+  session({
+    name: "sessionHere",
+    // TODO to change the secret before deployment
+    secret: "sessionSecret",
+    saveUninitialized: true,
+    resave: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+      httpOnly: true,
+    },
+    store: MongoStore.create(
+      {
+        mongoUrl: dbURI,
+        autoRemove: "disabled",
+      },
+      function (err) {
+        console.log(err || "connect-mongodb setup ok");
+      }
+    ),
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(Admin.serializeUser());
+passport.deserializeUser(Admin.deserializeUser());
+passport.use(new LocalStrategy(Admin.authenticate()));
+
+
 app.use((req, res, next) => {
   console.log("req.session: ", req.session);
   console.log("req.user = " + req.user);
