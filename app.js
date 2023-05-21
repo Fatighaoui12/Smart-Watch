@@ -16,6 +16,8 @@ const Product = require("./models/product");
 //require("./seed");
 
 const dbURI = process.env.MONGODBURI || "mongodb://127.0.0.1:27017/agileDB";
+const gmailEmail = process.env.GMAILEMAIL || "AgileMailer@gmail.com";
+const gmailPassword = process.env.GMAILPASSWORD || "lppboiuuluhxguhc";
 
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
@@ -102,6 +104,18 @@ function loggedIn(req, res, next) {
     }
 }
 
+// Mailer Configs
+// create reusable transporter object using the default SMTP transport
+const transporter = nodemailer.createTransport({
+    port: 465, // true for 465, false for other ports
+    host: "smtp.gmail.com",
+    auth: {
+      user: gmailEmail,
+      pass: gmailPassword,
+    },
+    secure: true,
+  });
+
 app.post("/order", async (req, res) => {
   console.log(req);
   console.log(req.body);
@@ -122,6 +136,21 @@ app.post("/order", async (req, res) => {
 
   const newClient = new Client(client);
   await newClient.save();
+
+  const mailData = {
+    from: gmailEmail, // sender address
+    to: "AgileProjectHead@gmail.com", // list of receivers
+    subject: "New Order!",
+    text: "A new client ordered!",
+    html: `<h2>Order Details</h2><br/><b>Ordered Product:</b> ${client.orderedProduct}<br/><b>Full Name:</b> ${client.fullName}</br>
+      <b>Phone Number:</b> ${client.phoneNumber}</br><b>shipping Address:</b> ${client.shippingAddress}</br><b>City:</b> ${client.city}</br>`,
+  };
+
+  //Send Email to admin
+  transporter.sendMail(mailData, function (err, info) {
+    if (err) console.log(err);
+    else console.log("info");
+  });
 
   res.sendStatus(200);
 });
