@@ -42,7 +42,10 @@ app.get("/", async (req, res) => {
   res.render("index", { products });
 });
 
-
+app.get("/orders", loggedIn, async (req, res) => {
+    const clients = await Client.find({});
+    res.render("orders", { clients });
+  });
 
 
 
