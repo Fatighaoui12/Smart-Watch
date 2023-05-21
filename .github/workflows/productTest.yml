@@ -26,6 +26,9 @@ jobs:
       
       - name:  Install Jsdom
         run: npm install jsdom
-
+      
+      - name: Install jest
+        run: npm install jest
+        
       - name: Run tests
-        run: npm test
+        run: npx jest product.test.js
